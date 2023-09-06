@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingtan <jingtan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/06 00:40:23 by jingtan           #+#    #+#             */
-/*   Updated: 2023/09/06 00:40:23 by jingtan          ###   ########.fr       */
+/*   Created: 2023/09/06 00:52:40 by jingtan           #+#    #+#             */
+/*   Updated: 2023/09/06 16:07:49 by jingtan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
-
-#endif
+int	ft_isalpha(int letter)
+{
+	if ((letter >= 'a' && letter <= 'z') || (letter >= 'A' && letter <= 'Z'))
+		return (1);
+	return (0);
+}
