@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jingtan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jingtan <jingtan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/06 15:01:45 by jingtan           #+#    #+#             */
-/*   Updated: 2023/09/06 15:09:55 by jingtan          ###   ########.fr       */
+/*   Created: 2023/09/06 00:00:24 by jingtan           #+#    #+#             */
+/*   Updated: 2023/09/06 00:00:24 by jingtan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(const char *s)
+void	ft_bzero(void *s, unsigned int n)
 {
-	int	i;
+	unsigned char	*byte_ptr;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	byte_ptr = s;
+	while (n--)
+		*byte_ptr++ = 0;
 }

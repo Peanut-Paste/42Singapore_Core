@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jingtan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jingtan <jingtan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/06 15:01:45 by jingtan           #+#    #+#             */
-/*   Updated: 2023/09/06 15:09:55 by jingtan          ###   ########.fr       */
+/*   Created: 2023/09/07 18:53:01 by jingtan           #+#    #+#             */
+/*   Updated: 2023/09/07 18:53:01 by jingtan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(const char *s)
+void	*ft_memcpy(void *dest, const void *src, unsigned int n)
 {
-	int	i;
+	unsigned char	*byte_d;
+	const unsigned char	*byte_s;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	byte_d = dest;
+	byte_s = src;
+	while (n--)
+		*byte_d++ = *byte_s++;
+	return (dest);
 }
