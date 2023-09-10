@@ -10,3 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+void	*memmove(void *dest, const void *src, unsigned int n)
+{
+	unsigned char	*temp;
+	unsigned int		i;
+	const unsigned char	*byte_src;
+	unsigned char	*byte_dest;
+
+	i = 0;
+	byte_dest = dest;
+	byte_src = src;
+	while (i < n)
+	{
+		temp[i] = byte_src[i];
+		byte_dest[i] = temp[i];
+		i++;
+	}
+	return dest;
+}
