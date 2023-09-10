@@ -38,7 +38,7 @@ static int	get_size(const char *s, char c)
 	i = 0;
 	while (s[i] && s[i] != c)
 		i++;
-	return i;
+	return (i);
 }
 
 static char	*get_word(const char *s, char c)
@@ -59,7 +59,7 @@ static char	*get_word(const char *s, char c)
 	return (res);
 }
 
-char **ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**res;
 	int		i;
