@@ -24,15 +24,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	i = 0;
 	while (*s1)
-	{
-		res[i] = *s1++;
-		i++;
-	}
+		res[i++] = *s1++;
 	while (*s2)
-	{
-		res[i] = *s2++;
-		i++;
-	}
+		res[i++] = *s2++;
 	res[i] = '\0';
-	return res;
+	return (res);
 }
