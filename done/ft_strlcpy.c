@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize)
+#include "libft.h"
+
+unsigned int	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	unsigned int	i;
 	unsigned int	c;

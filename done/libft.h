@@ -12,28 +12,30 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
+#include <stdlib.h>
 
-int	ft_atoi(const char *str);
-int	ft_isalnum(int letter);
-int	ft_isalpha(int letter);
-int	ft_isascii(int letter);
-int	ft_isdigit(int letter);
-int	ft_isprint(int letter);
-unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize);
-int	ft_strlen(const char *s);
-int	ft_strlcat(char *dst, const char *src, int dstsize);
-int     ft_strncmp(const char *s1, const char *s2, unsigned int n);
-const char    *ft_strnstr(const char *s1, const char *s2, unsigned int n);
-const char	*ft_strchr(const char *s, int c);
-const char	*ft_strrchr(const char *s, int c);
-int	ft_tolower(int c);
-int ft_toupper(int c);
-void	*ft_memset(void *ptr, int c, unsigned int n);
-void	ft_bzero(void *s, unsigned int n);
-void	*ft_memcpy(void *dest, const void *src, unsigned int n);
-void	*ft_memchr(const void *s, int c, unsigned int n);
-int	ft_memcmp(const void *s1, const void *s2, unsigned int n);
-void	*memmove(void *dest, const void *src, unsigned int n);
-void	*ft_calloc(unsigned int nelem, unsigned int elsize);
-char	*ft_strdup(const char *s);
+int				ft_atoi(const char *str);
+int				ft_isalnum(int letter);
+int				ft_isalpha(int letter);
+int				ft_isascii(int letter);
+int				ft_isdigit(int letter);
+int				ft_isprint(int letter);
+unsigned int	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t			ft_strlen(const char *s);
+int				ft_strlcat(char *dst, const char *src, size_t size);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+const char		*ft_strnstr(const char *s1, const char *s2, size_t n);
+const char		*ft_strchr(const char *s, int c);
+const char		*ft_strrchr(const char *s, int c);
+int				ft_tolower(int c);
+int				ft_toupper(int c);
+void			*ft_memset(void *ptr, int c, size_t n);
+void			ft_bzero(void *s, size_t n);
+void			*ft_memcpy(void *dest, const void *src, size_t n);
+const void		*ft_memchr(const void *s, int c, size_t n);
+int				ft_memcmp(const void *s1, const void *s2, size_t n);
+void			*memmove(void *dest, const void *src, size_t n);
+void			*ft_calloc(size_t nelem, size_t elsize);
+char			*ft_strdup(const char *s);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
 #endif

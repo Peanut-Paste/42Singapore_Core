@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-const void	*ft_memchr(const void *s, int c, unsigned int n)
+#include "libft.h"
+
+const void	*ft_memchr(const void *s, int c, size_t n)
 {
 	const unsigned char	*byte_s;
 	unsigned char		byte_c;

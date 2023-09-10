@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-void	*ft_calloc(unsigned int nelem, unsigned int elsize)
+void	*ft_calloc(size_t nelem, size_t elsize)
 {
 	void	*new_array;
 

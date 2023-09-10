@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jingtan <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jingtan <jingtan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/06 15:01:45 by jingtan           #+#    #+#             */
-/*   Updated: 2023/09/06 15:09:55 by jingtan          ###   ########.fr       */
+/*   Created: 2023/09/10 14:47:28 by jingtan           #+#    #+#             */
+/*   Updated: 2023/09/10 14:47:28 by jingtan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	
 }

@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*memmove(void *dest, const void *src, unsigned int n)
+#include "libft.h"
+
+void	*memmove(void *dest, const void *src, size_t n)
 {
 	unsigned char		*temp;
 	unsigned int		i;
