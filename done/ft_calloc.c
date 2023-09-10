@@ -17,14 +17,10 @@ void	*ft_calloc(size_t nelem, size_t elsize)
 	void	*new_array;
 
 	if (nelem == 0 || elsize == 0)
-	{
 		return (NULL);
-	}
 	new_array = malloc(nelem * elsize);
 	if (!new_array)
-	{
-		ft_memset(new_array, 0, nelem * elsize);
-		return (new_array);
-	}
-	return (NULL);
+		return (NULL);
+	ft_memset(new_array, 0, nelem * elsize);
+	return (new_array);
 }
