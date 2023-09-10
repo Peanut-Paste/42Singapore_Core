@@ -12,10 +12,10 @@
 
 void	*memmove(void *dest, const void *src, unsigned int n)
 {
-	unsigned char	*temp;
+	unsigned char		*temp;
 	unsigned int		i;
 	const unsigned char	*byte_src;
-	unsigned char	*byte_dest;
+	unsigned char		*byte_dest;
 
 	i = 0;
 	byte_dest = dest;
@@ -26,5 +26,5 @@ void	*memmove(void *dest, const void *src, unsigned int n)
 		byte_dest[i] = temp[i];
 		i++;
 	}
-	return dest;
+	return (dest);
 }

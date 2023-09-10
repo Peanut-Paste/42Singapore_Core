@@ -12,7 +12,7 @@
 
 const char	*ft_strrchr(const char *s, int c)
 {
-	int		i;
+	int			i;
 	const char	*res;
 
 	i = 0;

@@ -34,5 +34,6 @@ void	*ft_memcpy(void *dest, const void *src, unsigned int n);
 void	*ft_memchr(const void *s, int c, unsigned int n);
 int	ft_memcmp(const void *s1, const void *s2, unsigned int n);
 void	*memmove(void *dest, const void *src, unsigned int n);
-
+void	*ft_calloc(unsigned int nelem, unsigned int elsize);
+char	*ft_strdup(const char *s);
 #endif

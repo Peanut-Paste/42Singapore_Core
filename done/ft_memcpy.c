@@ -12,7 +12,7 @@
 
 void	*ft_memcpy(void *dest, const void *src, unsigned int n)
 {
-	unsigned char	*byte_d;
+	unsigned char		*byte_d;
 	const unsigned char	*byte_s;
 
 	byte_d = dest;

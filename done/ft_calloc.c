@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingtan <jingtan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/07 13:54:30 by jingtan           #+#    #+#             */
-/*   Updated: 2023/09/07 13:54:30 by jingtan          ###   ########.fr       */
+/*   Created: 2023/09/10 09:52:16 by jingtan           #+#    #+#             */
+/*   Updated: 2023/09/10 09:52:16 by jingtan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-const char	*ft_strchr(const char *s, int c)
-{
-	int	i;
+#include <stdlib.h>
+#include "libft.h"
 
-	i = 0;
-	while (s[i])
+void	*ft_calloc(unsigned int nelem, unsigned int elsize)
+{
+	void	*new_array;
+
+	if (nelem == 0 || elsize == 0)
 	{
-		if (s[i] == c)
-			return (&s[i]);
-		i++;
+		return (NULL);
 	}
-	if (s[i] == c)
-		return (&s[i]);
-	return (0);
+	new_array = malloc(nelem * elsize);
+	if (!new_array)
+	{
+		ft_memset(new_array, 0, nelem * elsize);
+		return (new_array);
+	}
+	return (NULL);
 }
