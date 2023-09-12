@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingtan <jingtan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/10 09:52:16 by jingtan           #+#    #+#             */
-/*   Updated: 2023/09/10 09:52:16 by jingtan          ###   ########.fr       */
+/*   Created: 2023/09/11 23:09:50 by jingtan           #+#    #+#             */
+/*   Updated: 2023/09/12 13:10:25 by jingtan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nelem, size_t elsize)
+t_list	*ft_lstlast(t_list *lst)
 {
-	void	*new_array;
+	t_list	*temp;
 
-	if (nelem == 0 || elsize == 0)
+	if (!lst)
 		return (NULL);
-	new_array = malloc(nelem * elsize);
-	if (!new_array)
-		return (NULL);
-	ft_memset(new_array, 0, nelem * elsize);
-	return (new_array);
+	temp = lst;
+	while (temp->next)
+		temp = temp->next;
+	return (temp);
 }

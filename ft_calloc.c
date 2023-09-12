@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingtan <jingtan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/07 21:16:43 by jingtan           #+#    #+#             */
-/*   Updated: 2023/09/07 21:16:43 by jingtan          ###   ########.fr       */
+/*   Created: 2023/09/10 09:52:16 by jingtan           #+#    #+#             */
+/*   Updated: 2023/09/12 18:45:30 by jingtan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+void	*ft_calloc(size_t nelem, size_t elsize)
 {
-	const unsigned char	*byte_s1;
-	const unsigned char	*byte_s2;
+	void	*new_array;
 
-	byte_s1 = s1;
-	byte_s2 = s2;
-	while (n-- && (*byte_s1 || *byte_s2))
-	{
-		if (*byte_s1 != *byte_s2)
-			return (*byte_s1 - *byte_s2);
-		byte_s1++;
-		byte_s2++;
-	}
-	return (0);
+	new_array = malloc(nelem * elsize);
+	if (!new_array)
+		return (NULL);
+	ft_memset(new_array, 0, nelem * elsize);
+	return (new_array);
 }

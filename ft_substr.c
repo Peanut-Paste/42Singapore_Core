@@ -1,60 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingtan <jingtan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/10 22:05:21 by jingtan           #+#    #+#             */
-/*   Updated: 2023/09/10 22:05:21 by jingtan          ###   ########.fr       */
+/*   Created: 2023/09/10 14:47:28 by jingtan           #+#    #+#             */
+/*   Updated: 2023/09/12 16:05:47 by jingtan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count(int n)
-{
-	int				c;
-	long long int	temp;
-
-	c = 0;
-	temp = n;
-	if (temp < 0)
-	{
-		c++;
-		temp *= -1;
-	}
-	while (temp > 0)
-	{
-		temp /= 10;
-		c++;
-	}
-	return (c);
-}
-
-char	*ft_itoa(int n)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char			*res;
-	int				c;
-	int				i;
-	long long int	temp;
+	unsigned int	i;
+	unsigned int	slen;
 
-	c = count(n);
-	temp = n;
-	res = malloc(sizeof(char) * (c + 1));
+	slen = ft_strlen(s);
+	if (len > slen - start)
+		res = malloc((slen - start + 1) * sizeof(char));
+	else
+		res = malloc((len + 1) * sizeof(char));
 	if (!res)
 		return (NULL);
-	if (temp < 0)
+	i = 0;
+	if (start < slen)
 	{
-		res[0] = '-';
-		temp *= -1;
+		while (i < len && s[start + i])
+		{
+			res[i] = s[start + i];
+			i++;
+		}
 	}
-	i = c - 1;
-	while (temp > 0)
-	{
-		res[i--] = temp % 10 + 48;
-		temp /= 10;
-	}
-	res[c] = '\0';
+	res[i] = '\0';
 	return (res);
 }

@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingtan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/06 17:22:33 by jingtan           #+#    #+#             */
-/*   Updated: 2023/09/06 17:59:40 by jingtan          ###   ########.fr       */
+/*   Created: 2023/09/12 20:02:27 by jingtan           #+#    #+#             */
+/*   Updated: 2023/09/12 20:46:02 by jingtan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-const char	*ft_strnstr(const char *s1, const char *s2, size_t n)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	unsigned int	i;
-	int				j;
+	t_list	*res;
+	t_list	*new;
 
-	i = 0;
-	if (ft_strlen(s2) == 0)
-		return (s1);
-	while (s1[i] && i + ft_strlen(s2) - 1 < n)
+	if (!lst)
+		return (NULL);
+	res = ft_lstnew(f(lst->content));
+	lst = lst->next;
+	while (lst)
 	{
-		j = 0;
-		while (s1[i + j] == s2[j] && s1[i + j] && s2[j])
-			j++;
-		if (s2[j] == '\0')
-			return (&s1[i]);
-		i++;
+		new = ft_lstnew(f(lst->content));
+		if (!new)
+		{
+			del(new->content);
+			free(new);
+			return (NULL);
+		}
+		ft_lstadd_back(&res, new);
+		lst = lst->next;
 	}
-	return (0);
+	return (res);
 }

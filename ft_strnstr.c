@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jingtan <jingtan@student.42singapore.sg    +#+  +:+       +#+        */
+/*   By: jingtan <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/07 21:05:15 by jingtan           #+#    #+#             */
-/*   Updated: 2023/09/07 21:05:15 by jingtan          ###   ########.fr       */
+/*   Created: 2023/09/06 17:22:33 by jingtan           #+#    #+#             */
+/*   Updated: 2023/09/12 15:30:40 by jingtan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-const void	*ft_memchr(const void *s, int c, size_t n)
+char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {
-	const unsigned char	*byte_s;
-	unsigned char		byte_c;
-	unsigned int		i;
+	unsigned int	i;
+	int				j;
 
-	byte_s = s;
-	byte_c = c;
 	i = 0;
-	while (i < n)
+	if (ft_strlen(s2) == 0)
+		return ((char *)s1);
+	while (s1[i] && i + ft_strlen(s2) - 1 < n)
 	{
-		if (byte_s[i] == byte_c)
-			return (s + i);
+		j = 0;
+		while (s1[i + j] == s2[j] && s1[i + j] && s2[j])
+			j++;
+		if (s2[j] == '\0')
+			return ((char *)&s1[i]);
 		i++;
 	}
 	return (0);
