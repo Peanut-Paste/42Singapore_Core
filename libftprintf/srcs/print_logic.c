@@ -40,6 +40,7 @@ static int	print_var2(char c, void *ptr)
 static int	print_var(char c, void *ptr)
 {
 	char	*p;
+	size_t	length;
 
 	if (c == 'c')
 	{
@@ -53,7 +54,9 @@ static int	print_var(char c, void *ptr)
 	else
 		return (print_var2(c, ptr));
 	ft_putstr_fd(p, 1);
-	return (ft_strlen(p));
+	length = ft_strlen(p);
+	free(p);
+	return (length);
 }
 
 int	ft_printf2(const char *fmt, va_list args)
