@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 SRCSMAIN	= ft_printf.c
-SRCSFILE	= general.c print_logic.c
+SRCSFILE	= ft_printf_logic.c ft_printf_utils.c
 SRCSPATH	= ./srcs/
 SRCS	= ${addprefix ${SRCSPATH}, ${SRCSFILE}}
 LIBFT	= libft

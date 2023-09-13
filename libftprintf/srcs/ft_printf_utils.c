@@ -12,46 +12,61 @@
 
 #include "libftprintf.h"
 
-static int	gethexa_len(long int n)
+int ft_putunbr_fd(unsigned int n, int fd)
 {
-	int	res;
-
-	if (n == 0)
-		return (1);
-	res = 0;
-	while (n != 0)
+	int len;
+	
+	len = 0;
+	if (n > 9) 
 	{
-		n /= 16;
-		res++;
+		len += ft_putunbr_fd(n / 10, fd);
+		ft_putchar_fd(n % 10 + '0', fd);
+		len++;
 	}
-	return (res);
+	else 
+	{
+		ft_putchar_fd(n + '0', fd);
+		len++;
+  	}
+  	return (len);
 }
 
-char	*ft_itoahexa(int n, const char *base)
+int	ft_puthex_fd(unsigned int n, const char *base, int fd)
 {
-	int			s_len;
-	long int	temp;
-	char		*res;
-	
-	temp = n;
-	s_len = gethexa_len(n);
-	if (temp < 0)
+	int	len;
+
+	len = 0;
+	if (n > 15)
 	{
-		temp *= -1;
-		s_len++;
+		len += ft_puthex_fd(n / 16, base, fd);
+		ft_putchar_fd(base[n % 16], fd);
+		len++;
 	}
-	res = malloc((s_len + 1) * sizeof(char));
-	if (!res)
-		return (NULL);
-	res[s_len] = '\0';
-	while (s_len--)
+	else
 	{
-		res[s_len] = base[temp % 16];
-		temp /= 16;
+		ft_putchar_fd(base[n], fd);
+		len++;
 	}
-	if (n < 0)
-		res[0] = '-';
-	return (res);
+	return (len);
+}
+
+int ft_putptr_fd(void *ptr, int fd)
+{
+  int len;
+  
+  len = 0;
+  if (!ptr) 
+  {
+    ft_putstr_fd("(nil)", fd);
+    len += 5; 
+  }
+  else 
+  {
+    ft_putstr_fd("00", fd);
+    len += 2;
+    len += ft_puthex_fd((unsigned long)ptr, "0123456789ABCDEF", fd);
+  }
+  return (len);
 }
 
 int	check_charset(char c, const char *charset)

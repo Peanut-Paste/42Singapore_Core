@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include <stdio.h>
 
 int	ft_printf(const char *fmt, ...)
 {
@@ -25,6 +26,14 @@ int	ft_printf(const char *fmt, ...)
 
 int main(void)
 {
-	int a = ft_printf("%s this is %s\nI am %%d %x years old. %c\n", "hello", "Isaac", -33, 'a');
-	ft_printf("%d", a);
+	unsigned int	unbr = 4294967295;
+	int a = ft_printf("ft_printf: %s %chis is %s\nI am %d years old(%i chinese year).\nMy age in hexa is %x(%X) %%\n", "Hello", 't' ,"Isaac", 26, 25, 26, 26);
+	int c = printf("stdprintf: %s %chis is %s\nI am %d years old(%i chinese year).\nMy age in hexa is %x(%X) %%\n", "Hello", 't' ,"Isaac", 26, 25, 26, 26);
+	int	b = ft_printf("ft_printf: This is a unsigned integer: %u\nThis is the pointer address of variable a: %p\n", unbr, &a);
+	int d = printf("stdprintf: This is a unsigned integer: %u\nThis is the pointer address of variable a: %p\n", unbr, &a);
+
+	ft_printf("First ft_printf length: %d\n", a);
+	ft_printf("First printf length: %d\n", c);
+	ft_printf("Second ft_printf length: %d\n", b);
+	ft_printf("Second printf length: %d\n", d);
 }

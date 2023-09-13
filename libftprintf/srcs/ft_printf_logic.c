@@ -14,28 +14,17 @@
 
 static int	print_var2(char c, void *ptr)
 {
-	char	*p;
 	size_t	length;
 
 	if (c == 'p')
-	{
-		//The void * pointer argument has to be printed in
-		//hexadecimal format.
-	}
+		length = ft_putptr_fd(ptr, 1);
+	else if (c == 'u')
+		length = ft_putunbr_fd((unsigned int)ptr, 1);
+	else if (c == 'x')
+		length = ft_puthex_fd((unsigned int)ptr, "0123456789abcdef", 1);
 	else
-	{
-		p = ft_itoahexa((int)ptr, "0123456789ABCDEF");
-		length = ft_strlen(p);
-		if (c == 'x')
-		{
-			while (*p)
-				ft_putchar_fd(ft_tolower(*p++), 1);
-		}
-		else
-			ft_putstr_fd(p, 1);
-		free(p);
-		return (length);
-	}
+		length = ft_puthex_fd((unsigned int)ptr, "0123456789ABCDEF", 1);
+	return (length);
 }
 
 static int	print_var(char c, void *ptr)
@@ -67,7 +56,7 @@ int	ft_printf2(const char *fmt, va_list args)
 
 	res = 0;
 	while (*fmt)
-	{
+	{	
 		if (*fmt == '%' && check_charset(*(fmt + 1), "cspdiuxX"))
 		{
 			argument = va_arg(args, void *);
@@ -76,10 +65,10 @@ int	ft_printf2(const char *fmt, va_list args)
 		}
 		else
 		{
-			res++;
-			if (*fmt == '%' && *(fmt + 1) == '%')
+			if (*fmt == '%')
 				fmt++;
 			ft_putchar_fd(*fmt++, 1);
+			res++;
 		}
 	}
 	return (res);
