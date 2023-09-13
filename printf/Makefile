@@ -10,7 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCSFILE	= main.c
+SRCSMAIN	= ft_printf.c
+SRCSFILE	= general.c print_logic.c
 SRCSPATH	= ./srcs/
 SRCS	= ${addprefix ${SRCSPATH}, ${SRCSFILE}}
 LIBFT	= libft
@@ -28,13 +29,13 @@ ifeq ($(OS),Windows_NT)
 endif
 
 ${NAME}	: ${OBJS}
-	${CC} ${CFLAGS} -c ${SRCS} -I ${INCS} -L ${LIBFT} -lft
+	${CC} ${CFLAGS} -c ${SRCSMAIN} ${SRCS} -I ${INCS} -L ${LIBFT} -lft
 	ar rcs ${NAME} ${OBJS}
 
 all	: ${NAME}
 
 test	: 
-	${CC} ${CFLAGS} ${SRCS} -I ${INCS} -L ${LIBFT} -lft
+	${CC} ${CFLAGS} ${SRCSMAIN} ${SRCS} -I ${INCS} -L ${LIBFT} -lft
 
 bonus	: ${NAME} ${BONUS_OBJS}
 	${CC} ${CFLAGS} -c ${BONUS_SRCS} -I ${INCS} -L ${LIBFT} -lft
