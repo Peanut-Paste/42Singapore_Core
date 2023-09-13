@@ -17,17 +17,25 @@ static int	print_var2(char c, void *ptr)
 	char	*p;
 	size_t	length;
 
-	p = ft_itoahexa((int)ptr, "0123456789ABCDEF");
-	length = ft_strlen(p);
-	if (c == 'x')
+	if (c == 'p')
 	{
-		while (*p)
-			ft_putchar_fd(ft_tolower(*p++), 1);
+		//The void * pointer argument has to be printed in
+		//hexadecimal format.
 	}
 	else
-		ft_putstr_fd(p, 1);
-	free(p);
-	return (length);
+	{
+		p = ft_itoahexa((int)ptr, "0123456789ABCDEF");
+		length = ft_strlen(p);
+		if (c == 'x')
+		{
+			while (*p)
+				ft_putchar_fd(ft_tolower(*p++), 1);
+		}
+		else
+			ft_putstr_fd(p, 1);
+		free(p);
+		return (length);
+	}
 }
 
 static int	print_var(char c, void *ptr)
