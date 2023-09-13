@@ -19,4 +19,6 @@
 int		check_charset(char c, const char *charset);
 int		ft_printf2(const char *fmt, va_list args);
 char	*ft_uitoa(int n);
+char	*ft_itoahexa(int n, const char *base);
+
 #endif

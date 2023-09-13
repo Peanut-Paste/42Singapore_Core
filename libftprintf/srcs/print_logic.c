@@ -12,29 +12,22 @@
 
 #include "libftprintf.h"
 
-static char	*itoa_base(int nbr, const char *base)
-{
-	int	length;
-	
-	length = ft_strlen(base);
-}
-
 static int	print_var2(char c, void *ptr)
 {
-	if (c == 'p')
+	char	*p;
+	size_t	length;
+
+	p = ft_itoahexa((int)ptr, "0123456789ABCDEF");
+	length = ft_strlen(p);
+	if (c == 'x')
 	{
-		// The void * pointer argument has to be printed in hexadecimal 
-		//format.
+		while (*p)
+			ft_putchar_fd(ft_tolower(*p++), 1);
 	}
 	else
-		if (c == 'x')
-		{
-		// Prints an number in hexadecimal (base16) lowercase format.
-		}
-		if (c == 'X')
-		{
-		// Prints an number in hexadecimal (base16) uppercase format.
-		}
+		ft_putstr_fd(p, 1);
+	free(p);
+	return (length);
 }
 
 static int	print_var(char c, void *ptr)
@@ -47,9 +40,9 @@ static int	print_var(char c, void *ptr)
 		ft_putchar_fd((int)ptr, 1);
 		return (1);
 	}
-	if (c == 's')
+	else if (c == 's')
 		p = (char *)ptr;
-	if (c == 'd' || c == 'i')
+	else if (c == 'd' || c == 'i')
 		p = ft_itoa((int)ptr);
 	else
 		return (print_var2(c, ptr));
