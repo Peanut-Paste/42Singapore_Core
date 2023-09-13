@@ -25,6 +25,6 @@ int	ft_printf(const char *fmt, ...)
 
 int main(void)
 {
-	int a = ft_printf("%s this is %s\nI am %%d %u years old.\n", "hello", "Isaac", -26);
+	int a = ft_printf("%s this is %s\nI am %%d %i years old.\n", "hello", "Isaac", -26);
 	ft_printf("%d", a);
 }

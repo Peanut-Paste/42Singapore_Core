@@ -12,6 +12,13 @@
 
 #include "libftprintf.h"
 
+static char	*itoa_base(int nbr, const char *base)
+{
+	int	length;
+	
+	length = ft_strlen(base);
+}
+
 static int	print_var2(char c, void *ptr)
 {
 	if (c == 'p')
@@ -32,27 +39,21 @@ static int	print_var2(char c, void *ptr)
 
 static int	print_var(char c, void *ptr)
 {
+	char	*p;
+
 	if (c == 'c')
 	{
 		ft_putchar_fd((int)ptr, 1);
 		return (1);
 	}
 	if (c == 's')
-	{
-		ft_putstr_fd((char *)ptr, 1);
-		return (ft_strlen((char *)ptr));
-	}
+		p = (char *)ptr;
 	if (c == 'd' || c == 'i')
-	{
-		ft_putstr_fd(ft_itoa((int)ptr), 1);
-		return (ft_strlen(ft_itoa((int)ptr)));
-	}
-	if (c == 'u') // not completed yet.
-	{
-		ft_putstr_fd(ft_uitoa((int)ptr), 1);
-		return (ft_strlen(ft_uitoa((int)ptr)));
-	}
-	return (print_var2(c, ptr));
+		p = ft_itoa((int)ptr);
+	else
+		return (print_var2(c, ptr));
+	ft_putstr_fd(p, 1);
+	return (ft_strlen(p));
 }
 
 int	ft_printf2(const char *fmt, va_list args)
