@@ -12,7 +12,8 @@
 
 SRCS	= ft_printf.c ft_printf_logic.c ft_printf_utils.c ft_printf_utils2.c
 OBJS	= ${SRCS:.c=.o}
-LIBFT	= libft
+LIBFT	= ./libft
+LIBFT_NAME = ${LIBFT}/libft.a
 CFLAGS	= -Wall -Wextra -Werror
 CC	= gcc
 NAME	= libftprintf.a
@@ -25,8 +26,11 @@ endif
 .c.o	:
 	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I ${LIBFT} -I./ -L${LIBFT} -llibft
 
-${NAME}	: ${OBJS}
-	cp ${LIBFT}/libft.a ${NAME}
+${LIBFT_NAME}	:
+			make -C ${LIBFT} all
+
+${NAME}	: ${LIBFT_NAME} ${OBJS}
+	cp ${LIBFT_NAME} ${NAME}
 	ar rcs ${NAME} ${OBJS}
 
 all	: ${NAME}
