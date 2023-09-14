@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   general.c                                          :+:      :+:    :+:   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jingtan <jingtan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:06:26 by jingtan           #+#    #+#             */
-/*   Updated: 2023/09/13 15:06:26 by jingtan          ###   ########.fr       */
+/*   Updated: 2023/09/14 13:15:07 by jingtan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int ft_putunbr_fd(unsigned int n, int fd)
+int	ft_putunbr_fd(unsigned int n, int fd)
 {
-	int len;
-	
+	int	len;
+
 	len = 0;
 	if (n > 9) 
 	{
@@ -27,8 +27,8 @@ int ft_putunbr_fd(unsigned int n, int fd)
 	{
 		ft_putchar_fd(n + '0', fd);
 		len++;
-  	}
-  	return (len);
+	}
+	return (len);
 }
 
 int	ft_puthex_fd(unsigned int n, const char *base, int fd)
@@ -50,23 +50,23 @@ int	ft_puthex_fd(unsigned int n, const char *base, int fd)
 	return (len);
 }
 
-int ft_putptr_fd(void *ptr, int fd)
+int	ft_putptr_fd(void *ptr, int fd)
 {
-  int len;
-  
-  len = 0;
-  if (!ptr) 
-  {
-    ft_putstr_fd("(nil)", fd);
-    len += 5; 
-  }
-  else 
-  {
-    ft_putstr_fd("00", fd);
-    len += 2;
-    len += ft_puthex_fd((unsigned long)ptr, "0123456789ABCDEF", fd);
-  }
-  return (len);
+	int	len;
+
+	len = 0;
+	if (!ptr) 
+	{
+		ft_putstr_fd("(nil)", fd);
+		len += 5; 
+	}
+	else 
+	{
+		ft_putstr_fd("00", fd);
+		len += 2;
+		len += ft_puthex_fd((unsigned long)ptr, "0123456789ABCDEF", fd);
+	}
+	return (len);
 }
 
 int	check_charset(char c, const char *charset)
@@ -76,6 +76,6 @@ int	check_charset(char c, const char *charset)
 		if (c == *charset)
 			return (1);
 		charset++;
-	}	
+	}
 	return (0);
 }
