@@ -50,26 +50,7 @@ int	ft_puthex_fd(unsigned int n, const char *base, int fd)
 	return (len);
 }
 
-int	ft_putptr_fd(void *ptr, int fd)
-{
-	int	len;
-
-	len = 0;
-	if (!ptr) 
-	{
-		ft_putstr_fd("(nil)", fd);
-		len += 5; 
-	}
-	else 
-	{
-		ft_putstr_fd("00", fd);
-		len += 2;
-		len += ft_puthex_fd((unsigned long)ptr, "0123456789ABCDEF", fd);
-	}
-	return (len);
-}
-
-int ft_putstrgetlen_fd(char *s, int fd)
+int	ft_putstrgetlen_fd(char *s, int fd)
 {
 	ft_putstr_fd(s, fd);
 	return (ft_strlen(s));
@@ -84,9 +65,4 @@ int	check_charset(char c, const char *charset)
 		charset++;
 	}
 	return (0);
-}
-
-void ft_putchari_fd(int i, int fd)
-{
-	write(fd, &i, 1);
 }

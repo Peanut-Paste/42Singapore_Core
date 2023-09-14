@@ -34,7 +34,7 @@ static int	print_var(char c, va_list args)
 
 	if (c == 'c')
 	{
-		ft_putchari_fd(va_arg(args, int), 1);
+		ft_putchar_fd(va_arg(args, int), 1);
 		return (1);
 	}
 	else if (c == 's')

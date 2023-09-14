@@ -6,12 +6,12 @@
 #    By: jingtan <jingtan@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 12:22:51 by jingtan           #+#    #+#              #
-#    Updated: 2023/09/13 12:22:51 by jingtan          ###   ########.fr        #
+#    Updated: 2023/09/14 19:12:43 by jingtan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCSMAIN	= ft_printf.c
-SRCSFILE	= ft_printf_logic.c ft_printf_utils.c
+SRCSFILE	= ft_printf_logic.c ft_printf_utils.c ft_printf_utils2.c
 SRCSPATH	= ./srcs/
 SRCS	= ${addprefix ${SRCSPATH}, ${SRCSFILE}}
 LIBFT	= libft
