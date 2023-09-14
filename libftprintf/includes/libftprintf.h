@@ -22,5 +22,6 @@ int	ft_putptr_fd(void *ptr, int fd);
 int	ft_putunbr_fd(unsigned int n, int fd);
 int	ft_puthex_fd(unsigned int n, const char *base, int fd);
 int ft_putstrgetlen_fd(char *s, int fd);
+void ft_putchari_fd(int i, int fd);
 
 #endif

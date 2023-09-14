@@ -85,3 +85,8 @@ int	check_charset(char c, const char *charset)
 	}
 	return (0);
 }
+
+void ft_putchari_fd(int i, int fd)
+{
+	write(fd, &i, 1);
+}
