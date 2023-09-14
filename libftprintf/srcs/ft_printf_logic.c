@@ -38,14 +38,15 @@ static int	print_var(char c, void *ptr)
 		return (1);
 	}
 	else if (c == 's')
-		p = (char *)ptr;
+		length = ft_putstrgetlen_fd((char *)ptr, 1);
 	else if (c == 'd' || c == 'i')
+	{
 		p = ft_itoa(*((int *)ptr));
+		length = ft_putstrgetlen_fd(p, 1);
+		free(p);
+	}
 	else
 		return (print_var2(c, ptr));
-	ft_putstr_fd(p, 1);
-	length = ft_strlen(p);
-	free(p);
 	return (length);
 }
 

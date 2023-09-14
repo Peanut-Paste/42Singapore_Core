@@ -69,6 +69,12 @@ int	ft_putptr_fd(void *ptr, int fd)
 	return (len);
 }
 
+int ft_putstrgetlen_fd(char *s, int fd)
+{
+	ft_putstr_fd(s, fd);
+	return (ft_strlen(s));
+}
+
 int	check_charset(char c, const char *charset)
 {
 	while (*charset)

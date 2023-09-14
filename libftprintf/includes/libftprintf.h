@@ -21,5 +21,6 @@ int	ft_printf2(const char *fmt, va_list args);
 int	ft_putptr_fd(void *ptr, int fd);
 int	ft_putunbr_fd(unsigned int n, int fd);
 int	ft_puthex_fd(unsigned int n, const char *base, int fd);
+int ft_putstrgetlen_fd(char *s, int fd);
 
 #endif
