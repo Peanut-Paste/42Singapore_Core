@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	print_var2(char c, va_list args)
 {
@@ -21,9 +21,11 @@ static int	print_var2(char c, va_list args)
 	else if (c == 'u')
 		length = ft_putunbr_fd(va_arg(args, unsigned int), 1);
 	else if (c == 'x')
-		length = ft_puthex_fd(va_arg(args, unsigned int), "0123456789abcdef", 1);
+		length = ft_puthex_fd(va_arg(args, unsigned int),
+				"0123456789abcdef", 1);
 	else
-		length = ft_puthex_fd(va_arg(args, unsigned int), "0123456789ABCDEF", 1);
+		length = ft_puthex_fd(va_arg(args, unsigned int),
+				"0123456789ABCDEF", 1);
 	return (length);
 }
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_putunbr_fd(unsigned int n, int fd)
 {
@@ -52,6 +52,11 @@ int	ft_puthex_fd(unsigned int n, const char *base, int fd)
 
 int	ft_putstrgetlen_fd(char *s, int fd)
 {
+	if (!s)
+	{
+		write(fd, "(null)", 6);
+		return (6);
+	}
 	ft_putstr_fd(s, fd);
 	return (ft_strlen(s));
 }

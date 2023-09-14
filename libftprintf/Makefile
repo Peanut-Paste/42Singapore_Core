@@ -10,36 +10,29 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCSMAIN	= ft_printf.c
-SRCSFILE	= ft_printf_logic.c ft_printf_utils.c ft_printf_utils2.c
-SRCSPATH	= ./srcs/
-SRCS	= ${addprefix ${SRCSPATH}, ${SRCSFILE}}
-LIBFT	= libft
-BONUS_SRCS	= 
+SRCS	= ft_printf.c ft_printf_logic.c ft_printf_utils.c ft_printf_utils2.c
 OBJS	= ${SRCS:.c=.o}
-BONUS_OBJS	= ${BONUS_SRCS:.c=.o}
+LIBFT	= libft
 CFLAGS	= -Wall -Wextra -Werror
 CC	= gcc
 NAME	= libftprintf.a
 RM	= rm -f
-INCS	= includes
 
 ifeq ($(OS),Windows_NT)
     RM = del /f
 endif
 
+.c.o	:
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I ${LIBFT} -I./ -L${LIBFT} -llibft
+
 ${NAME}	: ${OBJS}
-	${CC} ${CFLAGS} -c ${SRCSMAIN} ${SRCS} -I ${INCS} -L ${LIBFT} -lft
+	cp ${LIBFT}/libft.a ${NAME}
 	ar rcs ${NAME} ${OBJS}
 
 all	: ${NAME}
 
 test	: 
 	${CC} ${CFLAGS} ${SRCSMAIN} ${SRCS} -I ${INCS} -L ${LIBFT} -lft
-
-bonus	: ${NAME} ${BONUS_OBJS}
-	${CC} ${CFLAGS} -c ${BONUS_SRCS} -I ${INCS} -L ${LIBFT} -lft
-	ar rcs ${NAME} ${BONUS_OBJS}
 
 clean	:
 		${RM} ${OBJS} ${BONUS_OBJS}
@@ -49,4 +42,4 @@ fclean	: clean
 
 re		: fclean all
 
-.PHONY	: all clean fclean re
+.PHONY	: .c.o all clean fclean re
