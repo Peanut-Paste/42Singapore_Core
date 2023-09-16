@@ -17,5 +17,8 @@
 # include <stdlib.h>
 
 int	is_printable(char c);
+void	*ft_memset(void *ptr, int c, size_t n);
+char	*ft_strdup(char buffer[BUFFER_SIZE], int size);
+int	get_nextnewline(int start, int fd);
 
 #endif

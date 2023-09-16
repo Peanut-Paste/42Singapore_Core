@@ -18,27 +18,40 @@ char	*get_file(int fd)
 {
 	char			buffer[BUFFER_SIZE];
 	char			*res;
-	static int		end = 0;
-	int				start;
 	int				i;
 
-	start = end;
-	read(fd, buffer, BUFFER_SIZE);
-	while (buffer[end] && buffer[end] != '\n')
-		end++;
-	if (buffer[end] == '\n')
-		end++;
-	res = malloc((end - start + 1) * sizeof(char));
-	res[end] = '\0';
+	ft_memset(buffer, 0, BUFFER_SIZE);
 	i = 0;
-	while (start < end)
-		res[i++] = buffer[start++];
+	while (fd > 0)
+	{
+		read(fd, &buffer[i], 1);
+		if (!buffer[i] || buffer[i] == '\n')
+			break;
+		i++;
+	}
+	if (buffer[i] == '\n')
+		i++;
+	res = ft_strdup(buffer, i);
 	return (res);
 }
 
 char	*get_next_line(int fd)
 {
-	return (get_file(fd));
+	char	buffer[BUFFER_SIZE];
+	int		count;
+	int		i;
+	char	*res;
+	
+	if (fd < 0)
+		return (NULL);
+	if (fd > 0)
+		return (get_file(fd));
+	ft_memset(buffer, 0, BUFFER_SIZE);
+	read(fd, buffer, BUFFER_SIZE);
+	while (buffer[count])
+		count++;
+	res = ft_strdup(buffer, count);
+	return (res);
 }
 
 int	main(void)
@@ -49,9 +62,9 @@ int	main(void)
 	fd = open("test.txt", O_RDONLY);
 	if (fd < 0)
 		return (-1);
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 10; i++)
 	{
-		a = get_next_line(fd);
+		a = get_next_line(0);
 		printf("%s", a);
 	}
 	close(fd);
