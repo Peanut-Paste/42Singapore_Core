@@ -14,61 +14,59 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-char	*ft_crealloc(char *ptr, int size, char new)
+char	*get_file(int fd)
 {
-	char	*res;
-	int		i;
+	char			buffer[BUFFER_SIZE];
+	char			*res;
+	int				i;
 
-	res = malloc(sizeof(char) * (size + 1));
-	if (!res)
-		return (NULL);
+	ft_memset(buffer, 0, BUFFER_SIZE);
 	i = 0;
-	if (size != 1)
+	while (fd > 0 && i < BUFFER_SIZE)
 	{
-		while (*ptr)
-			res[i++] = *ptr++;
+		read(fd, &buffer[i], 1);
+		if (!buffer[i] || buffer[i] == '\n')
+			break;
+		i++;
 	}
-	res[i++] = new;
-	res[i] = '\0';
+	if (buffer[i] == '\n')
+		i++;
+	res = ft_strdup(buffer, i);
 	return (res);
 }
 
 char	*get_next_line(int fd)
 {
-	char	*buffer;
-	char	current;
+	char	buffer[BUFFER_SIZE];
+	int		count;
 	int		i;
-
+	char	*res;
+	
 	if (fd < 0)
 		return (NULL);
-	read(fd, &current, 1);
-	if (!current)
-		return (NULL);
-	i = 0;
-	while (fd >= 0 && current && current != '\n')
-	{
-		buffer = ft_crealloc(buffer, i++ + 1, current);
-		current = 0;
-		read(fd, &current, 1);
-	}
-	if (current == '\n')
-		buffer = ft_crealloc(buffer, i + 1, current);
-	return (buffer);
+	if (fd > 0)
+		return (get_file(fd));
+	ft_memset(buffer, 0, BUFFER_SIZE);
+	read(fd, buffer, BUFFER_SIZE);
+	while (buffer[count])
+		count++;
+	res = ft_strdup(buffer, count);
+	return (res);
 }
 
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*a;
+int	main(void)
+{
+	int		fd;
+	char	*a;
 
-// 	fd = open("test.txt", O_RDONLY);
-// 	if (fd < 0)
-// 		return (-1);
-// 	for (int i = 0; i < 10; i++)
-// 	{
-// 		a = get_next_line(fd);
-// 		printf("%s", a);
-// 	}
-// 	close(fd);
-// 	return (0);
-// }
+	fd = open("test.txt", O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	for (int i = 0; i < 10; i++)
+	{
+		a = get_next_line(fd);
+		printf("%s", a);
+	}
+	close(fd);
+	return (0);
+}
