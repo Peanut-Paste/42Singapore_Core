@@ -14,59 +14,43 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-char	*ft_crealloc(char *ptr, int size, char new)
+char	*get_file(int fd)
 {
-	char	*res;
-	int		i;
+	char			buffer[BUFFER_SIZE];
+	char			*res;
+	int				i;
 
-	res = malloc(sizeof(char) * (size + 1));
-	if (!res)
-	{
-		if (size != 1)
-			free(ptr);
-		return (NULL);
-	}
+	ft_memset(buffer, 0, BUFFER_SIZE);
 	i = 0;
-	if (size != 1)
+	while (fd > 0 && i < BUFFER_SIZE)
 	{
-		while (ptr[i])
-		{
-			res[i] = ptr[i];
-			i++;
-		}
-		free(ptr);
+		read(fd, &buffer[i], 1);
+		if (!buffer[i] || buffer[i] == '\n')
+			break;
+		i++;
 	}
-	res[i++] = new;
-	res[i] = '\0';
+	if (buffer[i] == '\n')
+		i++;
+	res = ft_strdup(buffer, i);
 	return (res);
 }
 
 char	*get_next_line(int fd)
 {
-	char	*buffer;
-	char	current;
-	int		i;
-
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	char	buffer[BUFFER_SIZE];
+	int		count;
+	char	*res;
+	
+	if (fd < 0)
 		return (NULL);
-	if (read(fd, &current, 1) < 0)
-		return (NULL);
-	i = 0;
-	while (current && current != '\n')
-	{
-		buffer = ft_crealloc(buffer, i++ + 1, current);
-		if (!buffer)
-			return (NULL);
-		current = 0;
-		read(fd, &current, 1);
-	}
-	if (current == '\n')
-	{
-		buffer = ft_crealloc(buffer, i + 1, current);
-		if (!buffer)
-			return (NULL);
-	}
-	return (buffer);
+	if (fd > 0)
+		return (get_file(fd));
+	ft_memset(buffer, 0, BUFFER_SIZE);
+	read(fd, buffer, BUFFER_SIZE);
+	while (buffer[count])
+		count++;
+	res = ft_strdup(buffer, count);
+	return (res);
 }
 
 // int	main(void)
