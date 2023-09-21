@@ -42,13 +42,11 @@ static char	*ft_addstring(char *target, char *buffer, size_t size)
 	return (res);
 }
 
-static char	*ft_read(int fd)
+static char	*ft_read(int fd, char *storage)
 {
 	char	*buffer;
 	int		status;
-	char	*res;
 
-	res = NULL;
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
@@ -56,18 +54,21 @@ static char	*ft_read(int fd)
 	while (status)
 	{
 		status = read(fd, buffer, BUFFER_SIZE);
-		if (status == 0 || status < 0)
+		if (status == 0)
 			break ;
-		buffer[status] = '\0';
-		res = ft_addstring(res, buffer, status);
-		if (res[status - 1] == '\n')
+		if (status < 0)
 		{
 			free(buffer);
-			return (res);
+			free(storage);
+			return (NULL);
 		}
+		buffer[status] = '\0';
+		storage = ft_addstring(storage, buffer, status);
+		if (nl_exist(storage))
+			break ;
 	}
 	free(buffer);
-	return (res);
+	return (storage);
 }
 
 static char	*ft_getline(char *str)
@@ -110,17 +111,12 @@ void	del_storage(char **storage)
 
 char	*get_next_line(int fd)
 {
-	static char	*storage;
-	char		*temp;
+	static char	*storage = NULL;
 	char		*res;
 
 	if (fd < 0)
 		return (NULL);
-	temp = ft_read(fd);
-	if (temp && temp[0] != '\0')
-		storage = temp;
-	else
-		free(temp);
+	storage = ft_read(fd, storage);
 	if (!storage)
 		return (NULL);
 	res = ft_getline(storage);

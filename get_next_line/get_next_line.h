@@ -20,5 +20,6 @@ size_t	ft_strlen(char *s, int index);
 size_t	ft_getnlnt(char *s);
 void	del_storage2(char **storage, int i, size_t size);
 char	*get_next_line(int fd);
+int		nl_exist(char *str);
 
 #endif

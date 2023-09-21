@@ -54,3 +54,17 @@ void	del_storage2(char **storage, int i, size_t size)
 	free(*storage);
 	*storage = new;
 }
+
+int	nl_exist(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
