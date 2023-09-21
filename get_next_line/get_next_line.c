@@ -14,59 +14,118 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-char	*ft_crealloc(char *ptr, int size, char new)
+static char	*ft_addstring(char *target, char *buffer, size_t size)
 {
+	size_t	current_size;
 	char	*res;
 	int		i;
+	size_t	j;
 
-	res = malloc(sizeof(char) * (size + 1));
-	if (!res)
-	{
-		if (size != 1)
-			free(ptr);
-		return (NULL);
-	}
 	i = 0;
-	if (size != 1)
+	if (!target)
+		res = malloc(size + 1);
+	else
 	{
-		while (ptr[i])
+		current_size = ft_strlen(target, 0);
+		res = malloc(current_size + size + 1);
+		while (target[i])
 		{
-			res[i] = ptr[i];
+			res[i] = target[i];
 			i++;
 		}
-		free(ptr);
 	}
-	res[i++] = new;
+	j = 0;
+	while (j < size)
+		res[i++] = buffer[j++];
 	res[i] = '\0';
+	free(target);
 	return (res);
+}
+
+static char	*ft_read(int fd)
+{
+	char	*buffer;
+	int		status;
+	char	*res;
+
+	res = NULL;
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
+	status = 1;
+	while (status)
+	{
+		status = read(fd, buffer, BUFFER_SIZE);
+		if (status == 0 || status < 0)
+			break ;
+		buffer[status] = '\0';
+		res = ft_addstring(res, buffer, status);
+		if (res[status - 1] == '\n')
+		{
+			free(buffer);
+			return (res);
+		}
+	}
+	free(buffer);
+	return (res);
+}
+
+static char	*ft_getline(char *str)
+{
+	char	*res;
+	size_t	i;
+	size_t	size;
+
+	size = ft_getnlnt(str);
+	if (size == 0)
+		return (NULL);
+	res = malloc(size + 1);
+	if (!res)
+		return (NULL);
+	res[size] = '\0';
+	i = 0;
+	while (i < size)
+	{
+		res[i] = str[i];
+		i++;
+	}
+	return (res);
+}
+
+void	del_storage(char **storage)
+{
+	int		i;
+	size_t	size;
+
+	i = ft_getnlnt(*storage);
+	size = ft_strlen(*storage, i);
+	if (size == 0)
+	{
+		free(*storage);
+		*storage = NULL;
+	}
+	else
+		del_storage2(storage, i, size);
 }
 
 char	*get_next_line(int fd)
 {
-	char	*buffer;
-	char	current;
-	int		i;
+	static char	*storage;
+	char		*temp;
+	char		*res;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0)
 		return (NULL);
-	if (read(fd, &current, 1) < 0)
+	temp = ft_read(fd);
+	if (temp && temp[0] != '\0')
+		storage = temp;
+	else
+		free(temp);
+	if (!storage)
 		return (NULL);
-	i = 0;
-	while (current && current != '\n')
-	{
-		buffer = ft_crealloc(buffer, i++ + 1, current);
-		if (!buffer)
-			return (NULL);
-		current = 0;
-		read(fd, &current, 1);
-	}
-	if (current == '\n')
-	{
-		buffer = ft_crealloc(buffer, i + 1, current);
-		if (!buffer)
-			return (NULL);
-	}
-	return (buffer);
+	res = ft_getline(storage);
+	del_storage(&storage);
+	return (res);
 }
 
 // int	main(void)
@@ -74,13 +133,14 @@ char	*get_next_line(int fd)
 // 	int		fd;
 // 	char	*a;
 
-// 	fd = open("test.txt", O_RDONLY);
+// 	fd = open("empty", O_RDONLY);
 // 	if (fd < 0)
 // 		return (-1);
-// 	for (int i = 0; i < 10; i++)
+// 	for (int i = 0; i < 5; i++)
 // 	{
 // 		a = get_next_line(fd);
 // 		printf("%s", a);
+// 		free(a);
 // 	}
 // 	close(fd);
 // 	return (0);
