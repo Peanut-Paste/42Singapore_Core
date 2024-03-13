@@ -6,7 +6,7 @@
 #    By: jingtan <jingtan@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 12:22:51 by jingtan           #+#    #+#              #
-#    Updated: 2023/09/14 19:12:43 by jingtan          ###   ########.fr        #
+#    Updated: 2024/03/14 02:14:31 by jingtan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,6 @@ CFLAGS	= -Wall -Wextra -Werror
 CC	= gcc
 NAME	= libftprintf.a
 RM	= rm -f
-
-ifeq ($(OS),Windows_NT)
-    RM = del /f
-endif
 
 .c.o	:
 	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I ${LIBFT} -I./ -L${LIBFT} -llibft
@@ -35,7 +31,7 @@ ${NAME}	: ${LIBFT_NAME} ${OBJS}
 
 all	: ${NAME}
 
-test	: 
+test	:
 	${CC} ${CFLAGS} ${SRCSMAIN} ${SRCS} -I ${INCS} -L ${LIBFT} -lft
 
 clean	:
@@ -47,3 +43,11 @@ fclean	: clean
 re		: fclean all
 
 .PHONY	: .c.o all clean fclean re
+
+server:
+	${RM} server.out
+	gcc ./ft_server/ft_server.c ./utils/utils.c -o server.out
+
+client:
+	${RM} client.out
+	gcc ./ft_client/ft_client.c ./utils/utils.c -o client.out
