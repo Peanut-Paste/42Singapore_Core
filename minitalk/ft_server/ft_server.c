@@ -6,7 +6,7 @@
 /*   By: jingtan <jingtan@student.42singapore.sg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 22:05:08 by jingtan           #+#    #+#             */
-/*   Updated: 2024/03/14 02:12:31 by jingtan          ###   ########.fr       */
+/*   Updated: 2024/03/18 11:02:11 by jingtan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void ft_reset_int(int *num) {
 static void ft_receive(int signal) {
 	static int bitCount = 0;
 	static int character = 0;
+	static char *final_string = "";
 
 	character <<= 1;
 	if (signal == SIGUSR2)
@@ -30,7 +31,11 @@ static void ft_receive(int signal) {
 	}
 	bitCount++;
 	if (bitCount == 8) {
-		ft_putchar(character);
+		if (character == 0) {
+			ft_realloc_add_char(final_string, '\n');
+			ft_putstr(final_string);
+		}
+		ft_realloc_add_char(final_string, character);
 		ft_reset_int(&bitCount);
 		ft_reset_int(&character);
 	}

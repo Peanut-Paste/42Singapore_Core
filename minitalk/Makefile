@@ -6,7 +6,7 @@
 #    By: jingtan <jingtan@student.42singapore.sg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 12:22:51 by jingtan           #+#    #+#              #
-#    Updated: 2024/03/14 02:14:31 by jingtan          ###   ########.fr        #
+#    Updated: 2024/03/18 10:49:52 by jingtan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,8 @@ re		: fclean all
 
 server:
 	${RM} server.out
-	gcc ./ft_server/ft_server.c ./utils/utils.c -o server.out
+	gcc ./ft_server/ft_server.c ./utils/utils.c ./utils/mem_utils.c -o server.out
 
 client:
 	${RM} client.out
-	gcc ./ft_client/ft_client.c ./utils/utils.c -o client.out
+	gcc ./ft_client/ft_client.c ./utils/utils.c ./utils/mem_utils.c -o client.out
