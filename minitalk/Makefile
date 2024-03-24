@@ -10,44 +10,34 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= ft_printf.c ft_printf_logic.c ft_printf_utils.c ft_printf_utils2.c
-OBJS	= ${SRCS:.c=.o}
-LIBFT	= ./libft
-LIBFT_NAME = ${LIBFT}/libft.a
+NAME	= minitalk
+UTILFILES	= ./utils/utils.c ./utils/mem_utils.c
+INCL	= include
 CFLAGS	= -Wall -Wextra -Werror
-CC	= gcc
-NAME	= libftprintf.a
+CC	= cc
 RM	= rm -f
 
-.c.o	:
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I ${LIBFT} -I./ -L${LIBFT} -llibft
+SERVERFILE = ${UTILFILES} ./ft_server/ft_server.c
+SERVERNAME	= server
 
-${LIBFT_NAME}	:
-			make -C ${LIBFT} all
+CLIENTFILE	= ${UTILFILES} ./ft_client/ft_client.c
+CLIENTNAME	= client
 
-${NAME}	: ${LIBFT_NAME} ${OBJS}
-	cp ${LIBFT_NAME} ${NAME}
-	ar rcs ${NAME} ${OBJS}
+SERVEROBJS	= ${SERVERFILE:.c=.o}
+CLIENTOBJS	= ${CLIENTFILE:.c=.o}
 
-all	: ${NAME}
+$(NAME): $(SERVEROBJS) $(CLIENTOBJS)
+	${CC} ${CFLAGS} ${SERVEROBJS} -o ${SERVERNAME}
+	${CC} ${CFLAGS} ${CLIENTOBJS} -o ${CLIENTNAME}
 
-test	:
-	${CC} ${CFLAGS} ${SRCSMAIN} ${SRCS} -I ${INCS} -L ${LIBFT} -lft
+all:	${NAME}
 
 clean	:
-		${RM} ${OBJS} ${BONUS_OBJS}
+		${RM} ${SERVEROBJS} ${CLIENTOBJS}
 
 fclean	: clean
-		${RM} ${NAME}
+		${RM} ${CLIENTNAME} ${SERVERNAME}
 
 re		: fclean all
 
-.PHONY	: .c.o all clean fclean re
-
-server:
-	${RM} server.out
-	gcc ./ft_server/ft_server.c ./utils/utils.c ./utils/mem_utils.c -o server.out
-
-client:
-	${RM} client.out
-	gcc ./ft_client/ft_client.c ./utils/utils.c ./utils/mem_utils.c -o client.out
+.PHONY	: all clean fclean re

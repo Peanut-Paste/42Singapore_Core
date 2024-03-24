@@ -12,12 +12,15 @@
 
 #include "../include/minitalk.h"
 
-void	ft_putchar(char c) {
+void	ft_putchar(char c)
+{
 	write(1, &c, 1);
 }
 
-void	ft_putstr(char *str) {
-	if (str) {
+void	ft_putstr(char *str)
+{
+	if (str)
+	{
 		while (*str)
 			write(1, str++, 1);
 	}
@@ -59,16 +62,19 @@ int	ft_atoi(char *str)
 	return (total * mod);
 }
 
-int	check_pid(char *ppid) {
-	int i;
+int	check_pid(char *ppid)
+{
+	int	i;
 
 	if (!ppid)
 	{
 		return (1);
 	}
 	i = 0;
-	while (ppid[i]) {
-		if (ppid[i] < '0' || ppid[i] > '9') {
+	while (ppid[i])
+	{
+		if (ppid[i] < '0' || ppid[i] > '9')
+		{
 			return (1);
 		}
 		i++;

@@ -13,14 +13,16 @@
 #include "../include/minitalk.h"
 #include <stdio.h>
 
-static void ft_reset_int(int *num) {
+static void	ft_reset_int(int *num)
+{
 	*num = 0;
 }
 
-static void ft_receive(int signal) {
-	static int bitCount = 0;
-	static int character = 0;
-	static char *final_string = "";
+static void	ft_receive(int signal)
+{
+	static int	bit_count = 0;
+	static int	character = 0;
+	static char	*final_string = NULL;
 
 	character <<= 1;
 	if (signal == SIGUSR2)
@@ -29,23 +31,29 @@ static void ft_receive(int signal) {
 		if (character == 0)
 			character++;
 	}
-	bitCount++;
-	if (bitCount == 8) {
-		if (character == 0) {
-			ft_realloc_add_char(final_string, '\n');
+	bit_count++;
+	if (bit_count == 8)
+	{
+		if (character == 0)
+		{
+			ft_realloc_add_char(&final_string, '\n');
 			ft_putstr(final_string);
+			free(final_string);
+			final_string = NULL;
 		}
-		ft_realloc_add_char(final_string, character);
-		ft_reset_int(&bitCount);
+		ft_realloc_add_char(&final_string, character);
+		ft_reset_int(&bit_count);
 		ft_reset_int(&character);
 	}
 }
 
-static int init(void) {
-	int id;
+static int	init(void)
+{
+	int	id;
 
 	id = getpid();
-	if (id == -1) {
+	if (id == -1)
+	{
 		ft_putstr("Error: cannot get pid");
 		return (1);
 	}
@@ -55,15 +63,17 @@ static int init(void) {
 	return (0);
 }
 
-int main(void) {
-	int err;
+int	main(void)
+{
+	int	err;
 
 	err = init();
-	if (err) {
+	if (err)
+	{
 		return (-1);
 	}
 	signal(SIGUSR1, ft_receive);
 	signal(SIGUSR2, ft_receive);
 	while (1)
-		usleep(100);
+		usleep(500);
 }

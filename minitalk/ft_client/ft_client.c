@@ -13,25 +13,30 @@
 #include "../include/minitalk.h"
 #include <stdio.h>
 
-void static ft_encode_and_send(char c, int pid) {
-	int i;
+static void	ft_encode_and_send(char c, int pid)
+{
+	int	i;
 
 	i = 0;
-	while (i++ < 8) {
-		if (c & 0x80) {
+	while (i++ < 8)
+	{
+		if (c & 0x80)
+		{
 			kill(pid, SIGUSR2);
 		}
-		else {
+		else
+		{
 			kill(pid, SIGUSR1);
 		}
 		c = c << 1;
-		usleep(100);
+		usleep(500);
 	}
 }
 
-int main(int argc, char **argv) {
-	int pid;
-	int i;
+int	main(int argc, char **argv)
+{
+	int	pid;
+	int	i;
 
 	if (argc != 3)
 		return (-1);
